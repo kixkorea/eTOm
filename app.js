@@ -61,13 +61,38 @@ async function startAudio() {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContext({ latencyHint: 'interactive' });
         
-        // Create audio graph: microphone -> gainNode -> destination (speakers/earphones)
+        // Professional Hearing Aid Mode Filters
+        
+        // 1. High Pass Filter: Remove low-frequency rumble (below 300Hz)
+        const highPass = audioCtx.createBiquadFilter();
+        highPass.type = 'highpass';
+        highPass.frequency.value = 300; 
+        
+        // 2. Presence Filter: Boost vocal clarity frequencies (2kHz)
+        const presenceFilter = audioCtx.createBiquadFilter();
+        presenceFilter.type = 'peaking';
+        presenceFilter.frequency.value = 2000;
+        presenceFilter.Q.value = 1.0;
+        presenceFilter.gain.value = 10; // Boost vocal range by +10dB
+        
+        // 3. Dynamics Compressor: Level the sound and prevent clipping
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
+        compressor.knee.setValueAtTime(40, audioCtx.currentTime);
+        compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+        compressor.attack.setValueAtTime(0, audioCtx.currentTime);
+        compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+
+        // Create audio graph: microphone -> filters -> compressor -> gainNode -> destination
         microphone = audioCtx.createMediaStreamSource(stream);
         gainNode = audioCtx.createGain();
-        
         gainNode.gain.value = parseFloat(volumeSlider.value);
         
-        microphone.connect(gainNode);
+        // Connect nodes
+        microphone.connect(highPass);
+        highPass.connect(presenceFilter);
+        presenceFilter.connect(compressor);
+        compressor.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         
         // Update UI
