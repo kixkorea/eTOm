@@ -2,6 +2,7 @@ const CACHE_NAME = 'etom-cache-v1';
 const urlsToCache = [
   './',
   './index.html',
+  './app.html',
   './style.css',
   './app.js',
   './manifest.json',

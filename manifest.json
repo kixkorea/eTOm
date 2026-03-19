@@ -1,7 +1,7 @@
 {
   "name": "eTOm",
   "short_name": "eTOm",
-  "start_url": "./index.html",
+  "start_url": "./app.html",
   "display": "standalone",
   "background_color": "#121212",
   "theme_color": "#121212",

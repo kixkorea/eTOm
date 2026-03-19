@@ -135,14 +135,16 @@ function stopAudio() {
     statusText.textContent = '대기 중';
 }
 
-btnStart.addEventListener('click', startAudio);
-btnStop.addEventListener('click', stopAudio);
+if (btnStart) btnStart.addEventListener('click', startAudio);
+if (btnStop) btnStop.addEventListener('click', stopAudio);
 
-volumeSlider.addEventListener('input', (e) => {
-    if (gainNode) {
-        gainNode.gain.value = parseFloat(e.target.value);
-    }
-});
+if (volumeSlider) {
+    volumeSlider.addEventListener('input', (e) => {
+        if (gainNode) {
+            gainNode.gain.value = parseFloat(e.target.value);
+        }
+    });
+}
 
 // --- PWA App Install Logic ---
 let deferredPrompt;

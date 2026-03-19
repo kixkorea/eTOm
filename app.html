@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>eTOm 오디오 증폭기 열기</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+</head>
+<body>
+    <div class="app-page-wrapper">
+        <!-- 앱 헤더: 타이틀과 우측 도움말 아이콘 -->
+        <header class="app-header">
+            <h1 class="app-title">eTOm</h1>
+            <!-- 문서 아이콘 링크 (홈페이지/설명서로 이동) -->
+            <a href="index.html" class="help-icon" title="사용 설명서 보기">📄</a>
+        </header>
+
+        <div class="app-functions">
+            <h3 style="text-align: center; color: #aaa; margin-bottom: 20px;">오디오 증폭 컨트롤</h3>
+            <div id="statusIndicator" class="status-indicator stopped">
+                <span id="statusText">대기 중</span>
+            </div>
+            
+            <div class="controls">
+                <button id="btnStart" class="btn btn-primary">연결 시작</button>
+                <button id="btnStop" class="btn btn-danger" disabled>연결 종료</button>
+            </div>
+
+            <div class="slider-container">
+                <label for="volumeSlider">소리 크기 조절</label>
+                <input type="range" id="volumeSlider" min="0" max="10" step="0.1" value="1">
+                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold;">
+                    <span style="font-size: 1.2rem;">작게</span>
+                    <span style="font-size: 1.2rem;">크게</span>
+                </div>
+            </div>
+            
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                .then(registration => console.log('SW registered'))
+                .catch(err => console.error('SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
