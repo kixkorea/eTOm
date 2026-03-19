@@ -146,31 +146,44 @@ volumeSlider.addEventListener('input', (e) => {
 
 // --- PWA App Install Logic ---
 let deferredPrompt;
-const btnInstall = document.getElementById('btnInstall');
+const installSection = document.getElementById('installSection');
+const installFallback = document.getElementById('installFallback');
 
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent the mini-infobar from appearing on mobile
     e.preventDefault();
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
-    // Update UI notify the user they can install the PWA
-    if (btnInstall) {
-        btnInstall.style.display = 'block';
+    
+    if (installSection) {
+        // Change visual cue to show it's ready to install
+        installSection.style.border = '2px solid #FF8C00';
+        installSection.style.backgroundColor = '#382a1b'; // Highlight color
+        if (installFallback) {
+            installFallback.textContent = "(클릭하여 설치를 진행하세요)";
+            installFallback.style.color = "#FF8C00";
+            installFallback.style.fontWeight = "bold";
+        }
+        
+        installSection.onclick = async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                // We've used the prompt, and can't use it again, throw it away
+                deferredPrompt = null;
+                
+                // Reset styles after interaction
+                installSection.style.border = 'none';
+                installSection.style.backgroundColor = '#2a2a2a';
+                if (installFallback) {
+                    installFallback.textContent = "(설치가 완료되었거나 프롬프트가 닫혔습니다)";
+                    installFallback.style.color = "#888";
+                    installFallback.style.fontWeight = "normal";
+                }
+            }
+        };
     }
 });
-
-if (btnInstall) {
-    btnInstall.addEventListener('click', async () => {
-        // Hide the app provided install promotion
-        btnInstall.style.display = 'none';
-        // Show the install prompt
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            // Wait for the user to respond to the prompt
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
-            // We've used the prompt, and can't use it again, throw it away
-            deferredPrompt = null;
-        }
-    });
-}

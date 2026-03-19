@@ -10,44 +10,55 @@
     <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">eTOm</h1>
-        
-        <!-- 랜딩 페이지 기능 (설치 및 설명서) -->
-        <div class="landing-section" style="margin-bottom: 30px; background-color: #2a2a2a; padding: 20px; border-radius: 20px;">
-            <p style="font-size: 1.5rem; color: #ccc; margin-top: 0; margin-bottom: 15px; font-weight: bold;">초저지연 오디오 증폭기</p>
-            <button id="btnInstall" class="btn btn-primary" style="display: none; width: 100%; margin: 0 0 20px 0; font-size: 1.8rem; padding: 20px; background-color: #FF8C00; color: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">앱 설치하기 (PWA)</button>
+    <div class="main-wrapper">
+        <!-- 상단: 홈페이지 이름 -->
+        <header class="header">
+            <h1 class="main-title">eTOm</h1>
+        </header>
+
+        <!-- 중앙: 2단 배치 (좌: 설치 / 우: 설명서) -->
+        <div class="split-layout">
+            <!-- 좌측: 설치 영역 (전체 클릭 가능) -->
+            <div class="split-left" id="installSection">
+                <div class="install-content">
+                    <h2 style="color: #FF8C00; font-size: 2.2rem; margin-top: 0;">⬇️ 앱 설치</h2>
+                    <p style="font-size: 1.3rem; margin-bottom: 20px;">여기를 클릭하여 기기에<br>설치하세요.</p>
+                    <p id="installFallback" style="font-size: 0.95rem; color: #888;">(설치 준비 중이거나 이미 설치되었습니다)</p>
+                </div>
+            </div>
+
+            <!-- 우측: 설명서 영역 -->
+            <div class="split-right">
+                <div class="manual-placeholder">
+                    <span style="font-size: 1.8rem; margin-bottom: 10px;">📖 사용 설명서</span>
+                    <p>(추후 이미지 파일로<br>교체될 영역입니다)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단: 이후 추가될 버튼 및 컨트롤 라인 -->
+        <div class="app-functions">
+            <h3 style="text-align: center; color: #aaa; margin-bottom: 20px;">오디오 증폭 컨트롤</h3>
+            <div id="statusIndicator" class="status-indicator stopped">
+                <span id="statusText">대기 중</span>
+            </div>
             
-            <div class="manual-section" style="text-align: left; font-size: 1.2rem; color: #ddd; background: #1f1f1f; padding: 15px; border-radius: 10px;">
-                <h3 style="color: #FFD700; margin-top: 0; font-size: 1.4rem;">📖 사용 설명서</h3>
-                <ol style="padding-left: 20px; margin-bottom: 0; line-height: 1.6;">
-                    <li style="margin-bottom: 8px;">위의 <strong>'앱 설치하기'</strong> 버튼을 눌러 스마트폰 화면에 추가하세요.</li>
-                    <li style="margin-bottom: 8px;">설치된 <strong>eTOm</strong> 앱을 실행하세요.</li>
-                    <li style="margin-bottom: 8px;"><strong>'연결 시작'</strong>을 누르면 즉시 주변 소리가 증폭됩니다.</li>
-                    <li>하단 슬라이더로 소리 크기를 조절하세요.</li>
-                </ol>
+            <div class="controls">
+                <button id="btnStart" class="btn btn-primary">연결 시작</button>
+                <button id="btnStop" class="btn btn-danger" disabled>연결 종료</button>
             </div>
-        </div>
 
-        <div id="statusIndicator" class="status-indicator stopped">
-            <span id="statusText">대기 중</span>
-        </div>
-        
-        <div class="controls">
-            <button id="btnStart" class="btn btn-primary">연결 시작</button>
-            <button id="btnStop" class="btn btn-danger" disabled>연결 종료</button>
-        </div>
-
-        <div class="slider-container">
-            <label for="volumeSlider">소리 크기 조절</label>
-            <input type="range" id="volumeSlider" min="0" max="10" step="0.1" value="1">
-            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold;">
-                <span style="font-size: 1.2rem;">작게</span>
-                <span style="font-size: 1.2rem;">크게</span>
+            <div class="slider-container">
+                <label for="volumeSlider">소리 크기 조절</label>
+                <input type="range" id="volumeSlider" min="0" max="10" step="0.1" value="1">
+                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold;">
+                    <span style="font-size: 1.2rem;">작게</span>
+                    <span style="font-size: 1.2rem;">크게</span>
+                </div>
             </div>
+            
+            <div id="errorMessage" class="error-message"></div>
         </div>
-        
-        <div id="errorMessage" class="error-message"></div>
     </div>
     <script src="app.js"></script>
     <script>
