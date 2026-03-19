@@ -29,13 +29,29 @@ body {
 .header {
     text-align: center;
     margin-bottom: 40px;
+    background-color: #FFD700;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.main-title {
-    font-size: 4rem;
-    color: #FFD700;
+.company-title {
+    font-size: 3.5rem;
+    color: #000;
     margin: 0;
+    font-weight: 900;
     letter-spacing: 2px;
+}
+
+.app-subtitle-badge {
+    display: inline-block;
+    background-color: #1976D2;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    font-weight: bold;
 }
 
 /* Split Layout (Responsive) */
@@ -50,14 +66,44 @@ body {
     flex: 1 1 300px; /* Grow, shrink, base width */
     background-color: #2a2a2a;
     border-radius: 20px;
-    padding: 40px 20px;
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 280px;
+    min-height: 100px; /* Reduced from 280px to be ~1/3 size */
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.button-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.6rem;
+    margin: 0 0 10px 0;
+}
+
+.button-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.button-desc {
+    font-size: 1.1rem;
+    color: #ddd;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    word-break: keep-all;
+}
+
+.button-fallback {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0;
 }
 
 .split-left {
@@ -71,19 +117,7 @@ body {
     transform: translateY(-5px);
 }
 
-.manual-placeholder {
-    width: 100%;
-    height: 100%;
-    border: 3px dashed #555;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #aaa;
-    padding: 20px;
-    box-sizing: border-box;
-}
+/* Manual placeholder removed */
 
 .app-functions {
     background-color: #1a1a1a;
@@ -245,4 +279,47 @@ input[type=range]::-webkit-slider-runnable-track {
 .help-icon:hover {
     background-color: #666;
     transform: scale(1.1);
+}
+
+/* iOS Install Popup Styles */
+.ios-popup {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex; /* Changed from default 'none' by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ios-popup-content {
+    background-color: #2a2a2a;
+    padding: 35px 25px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    border: 1px solid #444;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px; 
+    right: 20px;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-popup:hover { 
+    color: #fff; 
 }

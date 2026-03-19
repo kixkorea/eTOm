@@ -150,17 +150,46 @@ if (volumeSlider) {
 let deferredPrompt;
 const installSection = document.getElementById('installSection');
 const installFallback = document.getElementById('installFallback');
+const iosPopup = document.getElementById('iosInstallPopup');
+const closeIosPopup = document.getElementById('closeIosPopup');
 
+// 1. Detect device/environment
+const isIos = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+};
+const isStandalone = () => {
+    return ('standalone' in window.navigator && window.navigator.standalone) ||
+           window.matchMedia('(display-mode: standalone)').matches;
+};
+
+// 2. Catch the install prompt (Android/PC only)
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the mini-infobar from appearing on mobile
     e.preventDefault();
-    // Stash the event so it can be triggered later.
     deferredPrompt = e;
-    
-    if (installSection) {
-        // Change visual cue to show it's ready to install
+});
+
+// 2.5. Auto-popup for iOS on page load
+window.addEventListener('DOMContentLoaded', () => {
+    if (isIos() && !isStandalone() && iosPopup) {
+        iosPopup.style.display = 'flex';
+    }
+});
+
+// 3. Setup Install Button (Left Section)
+if (installSection) {
+    if (isStandalone()) {
+        // 이미 앱으로 설치된 상태
+        installSection.style.border = 'none';
+        installSection.style.backgroundColor = '#2a2a2a';
+        if (installFallback) {
+            installFallback.textContent = "(이미 앱으로 완벽하게 설치되었습니다 🎉)";
+            installFallback.style.color = "#888";
+        }
+    } else {
+        // 설치 가능한 상태 (강조 효과)
         installSection.style.border = '2px solid #FF8C00';
-        installSection.style.backgroundColor = '#382a1b'; // Highlight color
+        installSection.style.backgroundColor = '#382a1b';
         if (installFallback) {
             installFallback.textContent = "(클릭하여 설치를 진행하세요)";
             installFallback.style.color = "#FF8C00";
@@ -168,24 +197,40 @@ window.addEventListener('beforeinstallprompt', (e) => {
         }
         
         installSection.onclick = async () => {
+            if (isStandalone()) {
+                alert("이미 앱으로 설치되어 있습니다!");
+                return;
+            }
+
             if (deferredPrompt) {
-                // Show the install prompt
+                // Android & PC: 기본 브라우저 팝업
                 deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
                 const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                // We've used the prompt, and can't use it again, throw it away
                 deferredPrompt = null;
                 
-                // Reset styles after interaction
+                // 프롬프트 응답 후 UI 원상복구
                 installSection.style.border = 'none';
                 installSection.style.backgroundColor = '#2a2a2a';
                 if (installFallback) {
-                    installFallback.textContent = "(설치가 완료되었거나 프롬프트가 닫혔습니다)";
+                    installFallback.textContent = "(설치 창을 띄웠습니다)";
                     installFallback.style.color = "#888";
                     installFallback.style.fontWeight = "normal";
                 }
+            } else if (isIos()) {
+                // iOS (Apple): 자체 제작한 설명서 팝업 띄우기
+                if (iosPopup) iosPopup.style.display = 'flex';
+            } else {
+                // 기타 예외 상황
+                alert("현재 사용중인 브라우저에서는 자동 설치를 지원하지 않습니다.\n메뉴에서 '앱 설치' 또는 '홈 화면에 추가'를 찾아주세요.");
             }
         };
     }
-});
+}
+
+// 4. Close iOS Popup
+if (closeIosPopup) {
+    closeIosPopup.onclick = (e) => {
+        e.stopPropagation(); // 클릭 이벤트가 뒷배경으로 넘어가지 않도록 차단
+        iosPopup.style.display = 'none';
+    };
+}

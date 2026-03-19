@@ -13,7 +13,8 @@
     <div class="main-wrapper">
         <!-- 상단: 홈페이지 이름 -->
         <header class="header">
-            <h1 class="main-title">eTOm</h1>
+            <h1 class="company-title">KIXKOREA</h1>
+            <div class="app-subtitle-badge">eTOm (오디오 증폭 프로그램)</div>
         </header>
 
         <!-- 중앙: 2단 배치 (좌: 설치 / 우: 설명서) -->
@@ -21,18 +22,35 @@
             <!-- 좌측: 설치 영역 (전체 클릭 가능) -->
             <div class="split-left" id="installSection">
                 <div class="install-content">
-                    <h2 style="color: #FF8C00; font-size: 2.2rem; margin-top: 0;">⬇️ 앱 설치</h2>
-                    <p style="font-size: 1.3rem; margin-bottom: 20px;">여기를 클릭하여 기기에<br>설치하세요.</p>
-                    <p id="installFallback" style="font-size: 0.95rem; color: #888;">(설치 준비 중이거나 이미 설치되었습니다)</p>
+                    <h2 class="button-title" style="color: #FF8C00;">
+                        <img src="icon.png" alt="앱 로고" class="button-logo"> 앱 설치하기
+                    </h2>
+                    <p class="button-desc">클릭하시면 설치가 진행됩니다.<br>앱 실행 후 마이크 사용을 허용해 주세요.</p>
+                    <p id="installFallback" class="button-fallback">(설치 준비 중이거나 이미 설치되었습니다)</p>
                 </div>
             </div>
 
             <!-- 우측: 설명서 영역 -->
             <div class="split-right">
-                <div class="manual-placeholder">
-                    <span style="font-size: 1.8rem; margin-bottom: 10px;">📖 사용 설명서</span>
-                    <p>(추후 이미지 파일로<br>교체될 영역입니다)</p>
+                <div class="install-content">
+                    <h2 class="button-title" style="color: #4CAF50;">
+                        <img src="icon.png" alt="설명서 로고" class="button-logo"> 사용 설명서
+                    </h2>
+                    <p class="button-desc">기기별 사용 방법 안내 그림</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- iOS 설치 안내 팝업 (기본 숨김) -->
+        <div id="iosInstallPopup" class="ios-popup" style="display: none;">
+            <div class="ios-popup-content">
+                <span class="close-popup" id="closeIosPopup">&times;</span>
+                <h3 style="color: #FF8C00; margin-top: 0; font-size: 1.6rem;">🍎 아이폰 설치 안내</h3>
+                <p style="font-size: 1.1rem; line-height: 1.6;">
+                    화면 하단의 <strong style="font-size:1.4rem;">[공유 ⍗]</strong> 아이콘을 누르신 후,<br>
+                    메뉴에서 <strong style="color: #FFD700; font-size:1.4rem;">[홈 화면에 추가 ⊕]</strong>를<br>선택해 주세요!
+                </p>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 20px;">(애플 정책상 자동 설치 버튼을 지원하지 않습니다)</p>
             </div>
         </div>
 
