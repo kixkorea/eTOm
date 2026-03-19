@@ -11,14 +11,12 @@
 </head>
 <body>
     <div class="app-page-wrapper">
-        <!-- 앱 헤더: 타이틀과 우측 도움말 아이콘 -->
-        <header class="app-header">
-            <h1 class="app-title">eTOm</h1>
-            <!-- 문서 아이콘 링크 (홈페이지/설명서로 이동) -->
-            <a href="index.html" class="help-icon" title="사용 설명서 보기">📄</a>
-        </header>
-
         <div class="app-functions">
+            <!-- 설명서 아이콘: 우측 상단으로 이동 -->
+            <div class="top-link-container">
+                <a href="index.html" class="manual-link-icon" title="사용 설명서 보기">📄</a>
+            </div>
+            
             <h3 style="text-align: center; color: #aaa; margin-bottom: 20px;">오디오 증폭 컨트롤</h3>
             <div id="statusIndicator" class="status-indicator stopped">
                 <span id="statusText">대기 중</span>
