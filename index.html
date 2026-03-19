@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>99TOS 연결</title>
+    <title>eTOm 연결</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="icon.png">
@@ -11,7 +11,24 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">99TOS</h1>
+        <h1 class="title">eTOm</h1>
+        
+        <!-- 랜딩 페이지 기능 (설치 및 설명서) -->
+        <div class="landing-section" style="margin-bottom: 30px; background-color: #2a2a2a; padding: 20px; border-radius: 20px;">
+            <p style="font-size: 1.5rem; color: #ccc; margin-top: 0; margin-bottom: 15px; font-weight: bold;">초저지연 오디오 증폭기</p>
+            <button id="btnInstall" class="btn btn-primary" style="display: none; width: 100%; margin: 0 0 20px 0; font-size: 1.8rem; padding: 20px; background-color: #FF8C00; color: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">앱 설치하기 (PWA)</button>
+            
+            <div class="manual-section" style="text-align: left; font-size: 1.2rem; color: #ddd; background: #1f1f1f; padding: 15px; border-radius: 10px;">
+                <h3 style="color: #FFD700; margin-top: 0; font-size: 1.4rem;">📖 사용 설명서</h3>
+                <ol style="padding-left: 20px; margin-bottom: 0; line-height: 1.6;">
+                    <li style="margin-bottom: 8px;">위의 <strong>'앱 설치하기'</strong> 버튼을 눌러 스마트폰 화면에 추가하세요.</li>
+                    <li style="margin-bottom: 8px;">설치된 <strong>eTOm</strong> 앱을 실행하세요.</li>
+                    <li style="margin-bottom: 8px;"><strong>'연결 시작'</strong>을 누르면 즉시 주변 소리가 증폭됩니다.</li>
+                    <li>하단 슬라이더로 소리 크기를 조절하세요.</li>
+                </ol>
+            </div>
+        </div>
+
         <div id="statusIndicator" class="status-indicator stopped">
             <span id="statusText">대기 중</span>
         </div>
