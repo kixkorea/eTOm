@@ -180,19 +180,19 @@ window.addEventListener('DOMContentLoaded', () => {
 if (installSection) {
     if (isStandalone()) {
         // 이미 앱으로 설치된 상태
-        installSection.style.border = 'none';
-        installSection.style.backgroundColor = '#2a2a2a';
+        // installSection.style.border = 'none';
+        // installSection.style.backgroundColor = '#2a2a2a';
         if (installFallback) {
             installFallback.textContent = "(이미 앱으로 완벽하게 설치되었습니다 🎉)";
             installFallback.style.color = "#888";
         }
     } else {
-        // 설치 가능한 상태 (강조 효과)
-        installSection.style.border = '2px solid #FF8C00';
-        installSection.style.backgroundColor = '#382a1b';
+        // 설치 가능한 상태 (강조 효과 제거 - 디자인에서 처리)
+        // installSection.style.border = '2px solid #FF8C00';
+        // installSection.style.backgroundColor = '#382a1b';
         if (installFallback) {
-            installFallback.textContent = "(클릭하여 설치를 진행하세요)";
-            installFallback.style.color = "#FF8C00";
+            installFallback.innerText = "-클릭하시면설치가진행됩니다-";
+            installFallback.style.color = "white";
             installFallback.style.fontWeight = "bold";
         }
         
@@ -209,8 +209,8 @@ if (installSection) {
                 deferredPrompt = null;
                 
                 // 프롬프트 응답 후 UI 원상복구
-                installSection.style.border = 'none';
-                installSection.style.backgroundColor = '#2a2a2a';
+                // installSection.style.border = 'none';
+                // installSection.style.backgroundColor = '#2a2a2a';
                 if (installFallback) {
                     installFallback.textContent = "(설치 창을 띄웠습니다)";
                     installFallback.style.color = "#888";

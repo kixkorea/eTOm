@@ -1,132 +1,203 @@
 :root {
-    --bg-color: #121212;
+    --bg-color: #0a0a0a;
     --text-color: #ffffff;
-    --primary-color: #4CAF50;
-    --danger-color: #F44336;
-    --disabled-color: #555555;
+    --primary-color: #1a1a2e; /* Dark navy */
+    --accent-color: #e0e0e0;
+    --danger-color: #cf4a3f;
+    --disabled-color: #333333;
+    --card-bg: #1e1e1e;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: linear-gradient(180deg, #1a1a1a 0%, #111111 50%, #0a0a0a 100%);
+    color: #e0e0e0;
     min-height: 100vh;
-    touch-action: manipulation;
-}
-
-.main-wrapper {
-    width: 95%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 30px 10px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-    background-color: #FFD700;
-    padding: 30px 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.company-title {
-    font-size: 3.5rem;
-    color: #000;
-    margin: 0;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.app-subtitle-badge {
-    display: inline-block;
-    background-color: #1976D2;
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-/* Split Layout (Responsive) */
-.split-layout {
-    display: flex;
-    flex-wrap: wrap; /* Allows stacking on smaller screens */
-    gap: 20px;
-    margin-bottom: 50px;
-}
-
-.split-left, .split-right {
-    flex: 1 1 300px; /* Grow, shrink, base width */
-    background-color: #2a2a2a;
-    border-radius: 20px;
-    padding: 20px 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    min-height: 100px; /* Reduced from 280px to be ~1/3 size */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    overflow-x: hidden;
 }
 
-.button-title {
+.header-outer {
+    width: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-bottom: 1.5px solid rgba(255,255,255,0.1);
+}
+
+/* Landing Page Wrapper */
+.landing-wrapper {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Header Logo Area */
+.landing-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    font-size: 1.6rem;
-    margin: 0 0 10px 0;
+    gap: 15px;
+    max-width: 600px;
+    width: 100%;
 }
 
-.button-logo {
-    width: 28px;
-    height: 28px;
+.landing-logo {
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    border-radius: 5px;
 }
 
-.button-desc {
-    font-size: 1.1rem;
-    color: #ddd;
-    margin: 0 0 8px 0;
-    line-height: 1.4;
-    word-break: keep-all;
-}
-
-.button-fallback {
-    font-size: 0.9rem;
-    color: #888;
+.landing-title {
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 800;
     margin: 0;
+    text-transform: lowercase;
 }
 
-.split-left {
+/* Card Base Style (ensures identical size and shape) */
+.card-base {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 25px;
+    padding: 20px;
+    border: 5px solid #444444; /* Gray border for black theme */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+    box-sizing: border-box; 
+}
+
+/* Main Action Card */
+.main-card {
+    background-color: #1e1e1e; /* Dark card background */
+}
+
+.card-header {
+    background-color: #2a2a2a;
+    color: white;
+    padding: 12px 25px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 15px; /* Rounded box header */
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 0;
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    gap: 15px;
+}
+
+.action-btn {
+    flex: 1; /* Equal width */
+    display: flex;
+    flex-direction: column; /* Stack text inside button */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    color: white;
+    padding: 25px 10px;
+    border-radius: 15px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s, border 0.2s;
+    transition: transform 0.1s;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.5),
+        0 2px 4px -1px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
-/* Hover effect only for the left box since it's the interactive one */
-.split-left:hover {
-    background-color: #333;
-    transform: translateY(-5px);
+.action-btn:active {
+    transform: scale(0.98);
 }
 
-/* Manual placeholder removed */
+.action-btn.secondary {
+    background-color: #333333;
+}
 
+.btn-sub-text {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: normal;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.info-banner {
+    background-color: #181818;
+    border: 5px solid #444444; /* Gray border for black theme */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 230px; /* Restored to original fixed height */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+}
+
+.banner-badge {
+    background-color: #2a2a2a;
+    color: white;
+    padding: 8px 30px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
+.banner-content {
+    position: relative; /* Added to support absolute image positioning */
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Fill the card-base height */
+    box-sizing: border-box;
+    justify-content: flex-end; /* Push content to bottom */
+}
+
+.banner-footer {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #cccccc; /* Light text for dark background */
+    text-align: center;
+    width: 100%;
+}
+
+/* Existing App UI Styles (Retained for app.html) */
 .app-functions {
-    position: relative; /* For positioning the manual icon inside */
+    position: relative;
     background-color: #1a1a1a;
     padding: 30px 20px;
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     width: 90%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .top-link-container {
@@ -146,11 +217,6 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background-color 0.2s;
-}
-
-.manual-link-icon:hover {
-    background-color: #444;
 }
 
 .status-indicator {
@@ -159,10 +225,7 @@ body {
     margin-bottom: 25px;
     font-size: 1.6rem;
     font-weight: bold;
-    transition: background-color 0.3s;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
 }
 
 .status-indicator.stopped {
@@ -172,18 +235,15 @@ body {
 
 .status-indicator.running {
     background-color: rgba(76, 175, 80, 0.2);
-    color: var(--primary-color);
-    border: 4px solid var(--primary-color);
+    color: #4CAF50;
+    border: 4px solid #4CAF50;
 }
 
 .controls {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 30px;
-    width: 85%; /* Reduce width for better mobile grip */
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 }
 
 .btn {
@@ -193,110 +253,59 @@ body {
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    transition: opacity 0.2s;
     color: white;
 }
 
-.btn:active {
-    opacity: 0.8;
-}
-
-.btn:disabled {
-    background-color: var(--disabled-color);
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-}
-
-.btn-danger {
-    background-color: var(--danger-color);
-}
+.btn-primary { background-color: #4CAF50; }
+.btn-danger { background-color: var(--danger-color); }
 
 .slider-container {
     background-color: #2a2a2a;
-    padding: 12px 15px; /* Reduced from 20px */
+    padding: 20px;
     border-radius: 18px;
     margin-bottom: 20px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .slider-container label {
     display: block;
-    font-size: 1.1rem; /* Reduced from 1.5rem */
+    font-size: 1.5rem;
     margin-bottom: 12px;
-    font-weight: normal; /* Made it less bold */
-    color: #FFD700;
+    color: var(--accent-color);
+    text-align: center;
 }
 
 input[type=range] {
-    -webkit-appearance: none;
-    appearance: none;
     width: 100%;
-    background: transparent;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background: #FFD700;
-    cursor: pointer;
-    margin-top: -10px;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 20px;
-    cursor: pointer;
-    background: #555;
-    border-radius: 10px;
 }
 
 .error-message {
     color: var(--danger-color);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 20px;
-    min-height: 1.5em;
-    font-weight: bold;
+    text-align: center;
 }
 
-/* App Page Layout specific styles */
 .app-page-wrapper {
-    width: 95%;
-    max-width: 500px; /* Apps are generally narrower to mimic phone UI */
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 90vh; /* Centers content vertically slightly better */
-}
-
-/* App header hidden to simplify UI */
-.app-header {
-    display: none;
-}
-
-.help-icon:hover {
-    background-color: #666;
-    transform: scale(1.1);
+    min-height: 100vh;
 }
 
 /* iOS Install Popup Styles */
 .ios-popup {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    display: flex; /* Changed from default 'none' by JS */
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -314,19 +323,13 @@ input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     border: 1px solid #444;
+    color: white;
 }
 
 .close-popup {
     position: absolute;
-    top: 10px; 
-    right: 20px;
+    top: 10px; right: 20px;
     font-size: 2.5rem;
     cursor: pointer;
     color: #888;
-    line-height: 1;
-    transition: color 0.2s;
-}
-
-.close-popup:hover { 
-    color: #fff; 
 }

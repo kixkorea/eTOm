@@ -3,65 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>eTOm 연결</title>
+    <title>eTOm - ears to mouth</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
-    <div class="main-wrapper">
-        <!-- 상단: 홈페이지 이름 -->
-        <header class="header">
-            <h1 class="company-title">KIXKOREA</h1>
-            <div class="app-subtitle-badge">eTOm (오디오 증폭 프로그램)</div>
-        </header>
+    <header class="header-outer">
+        <div class="landing-header">
+            <img src="etom_LOGO_Rou.png" alt="eTOm Logo" class="landing-logo">
+            <h1 class="landing-title">ears to mouth</h1>
+        </div>
+    </header>
 
-        <!-- 중앙: 2단 배치 (좌: 설치 / 우: 설명서) -->
-        <div class="split-layout">
-            <!-- 좌측: 설치 영역 (전체 클릭 가능) -->
-            <div class="split-left" id="installSection">
-                <div class="install-content">
-                    <h2 class="button-title" style="color: #FF8C00;">
-                        <img src="icon.png" alt="앱 로고" class="button-logo"> 앱 설치하기
-                    </h2>
-                    <p class="button-desc">클릭하시면 설치가 진행됩니다.<br>앱 실행 후 마이크 사용을 허용해 주세요.</p>
-                    <p id="installFallback" class="button-fallback">(설치 준비 중이거나 이미 설치되었습니다)</p>
+    <div class="landing-wrapper">
+
+        <!-- 중앙 메인 카드: 앱 설치 및 설명서 -->
+        <main class="main-card card-base">
+            <div class="card-header">
+                오디오증폭기 eTOm
+            </div>
+            <div class="card-body">
+                <!-- 앱 설치 버튼 -->
+                <button id="installSection" class="action-btn">
+                    <span>앱 설치하기</span>
+                    <span id="installFallback" class="btn-sub-text">-클릭하시면설치가진행됩니다-</span>
+                </button>
+                
+                <!-- 사용설명서 버튼 -->
+                <a href="#" class="action-btn" id="manualBtn">
+                    <span>사용설명서</span>
+                    <span class="btn-sub-text">기기별사용안내 / manual</span>
+                </a>
+            </div>
+        </main>
+
+        <!-- 하단 정보 배너: 수동 재구축 단계 (위 카드와 속성 동일화) -->
+        <section class="info-banner card-base">
+            <div class="banner-badge">무선 이어폰을 사용하세요</div>
+            <div class="banner-content">
+                <img src="bott.png" alt="Instruction" style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -45%) scale(1.44); max-width: 100%; max-height: 100%; object-fit: contain; z-index: 1;">
+                <div class="banner-footer" style="position: relative; z-index: 10; margin-top: auto; width: 100%; top: 15px;">
+                    기기에 따라 기능이 달라질 수 있습니다
                 </div>
             </div>
+            <!-- 이스터에그: 우측 하단 숨겨진 영역 -->
+            <div id="easterEgg" style="position: absolute; bottom: 0; right: 0; width: 44px; height: 44px; z-index: 20; cursor: default;"></div>
+        </section>
+    </div>
 
-            <!-- 우측: 설명서 영역 -->
-            <div class="split-right">
-                <div class="install-content">
-                    <h2 class="button-title" style="color: #4CAF50;">
-                        <img src="icon.png" alt="설명서 로고" class="button-logo"> 사용 설명서
-                    </h2>
-                    <p class="button-desc">기기별 사용 방법 안내 그림</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- iOS 설치 안내 팝업 (기본 숨김) -->
-        <div id="iosInstallPopup" class="ios-popup" style="display: none;">
-            <div class="ios-popup-content">
-                <span class="close-popup" id="closeIosPopup">&times;</span>
-                <h3 style="color: #FF8C00; margin-top: 0; font-size: 1.6rem;">🍎 아이폰 설치 안내</h3>
-                <p style="font-size: 1.1rem; line-height: 1.6;">
-                    화면 하단의 <strong style="font-size:1.4rem;">[공유 ⍗]</strong> 아이콘을 누르신 후,<br>
-                    메뉴에서 <strong style="color: #FFD700; font-size:1.4rem;">[홈 화면에 추가 ⊕]</strong>를<br>선택해 주세요!
-                </p>
-                <p style="font-size: 0.9rem; color: #888; margin-top: 20px;">(애플 정책상 자동 설치 버튼을 지원하지 않습니다)</p>
-            </div>
-        </div>
-
-        <!-- 하단: 이후 추가될 버튼 및 컨트롤 라인 -->
-        <div class="future-buttons" style="text-align: center; margin-bottom: 30px;">
-            <a href="app.html" class="btn btn-primary" style="text-decoration: none; font-size: 1.5rem; padding: 15px 30px; border-radius: 10px; display: inline-block; background-color: #333; color: #fff;">👉 웹에서 바로 앱 실행하기</a>
-            <p style="color: #666; font-size: 0.9rem; margin-top: 15px;">(추후 이 자리에 다양한 버튼이 메뉴처럼 배치될 예정입니다)</p>
+    <!-- iOS 설치 안내 팝업 (기존 로직 유지) -->
+    <div id="iosInstallPopup" class="ios-popup" style="display: none;">
+        <div class="ios-popup-content">
+            <span class="close-popup" id="closeIosPopup">&times;</span>
+            <h3 style="color: #FFD700; margin-top: 0; font-size: 1.6rem;">🍎 아이폰 설치 안내</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6;">
+                화면 하단의 <strong style="font-size:1.4rem;">[공유 ⍗]</strong> 아이콘을 누르신 후,<br>
+                메뉴에서 <strong style="color: #FFD700; font-size:1.4rem;">[홈 화면에 추가 ⊕]</strong>를<br>선택해 주세요!
+            </p>
         </div>
     </div>
+
     <script src="app.js"></script>
     <script>
+        // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
@@ -69,6 +75,30 @@
                 .catch(err => console.error('SW registration failed:', err));
             });
         }
+        
+        // Manual Button Placeholder Action
+        document.getElementById('manualBtn').addEventListener('click', (e) => {
+            if (e.target.closest('a').getAttribute('href') === '#') {
+                e.preventDefault();
+                alert('사용설명서 파일은 준비 중입니다.');
+            }
+        });
+
+        // 이스터에그: 3번 클릭 시 app.html 이동
+        (function() {
+            let eggCount = 0;
+            let eggTimer = null;
+            document.getElementById('easterEgg').addEventListener('click', () => {
+                eggCount++;
+                clearTimeout(eggTimer);
+                if (eggCount >= 3) {
+                    eggCount = 0;
+                    window.location.href = 'app.html';
+                } else {
+                    eggTimer = setTimeout(() => { eggCount = 0; }, 2000);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
