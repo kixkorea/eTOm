@@ -4,6 +4,12 @@ let gainNode;
 let stream;
 let wakeLock = null;
 
+let highPass;
+let presenceFilter;
+let lowPass;
+let compressor;
+window.currentPresetMode = 1;
+
 const btnStart = document.getElementById('btnStart');
 const btnStop = document.getElementById('btnStop');
 const volumeSlider = document.getElementById('volumeSlider');
@@ -63,37 +69,31 @@ async function startAudio() {
         
         // Professional Hearing Aid Mode Filters
         
-        // 1. High Pass Filter: Remove low-frequency rumble (below 300Hz)
-        const highPass = audioCtx.createBiquadFilter();
+        // Initialize Global Filters
+        highPass = audioCtx.createBiquadFilter();
         highPass.type = 'highpass';
-        highPass.frequency.value = 300; 
         
-        // 2. Presence Filter: Boost vocal clarity frequencies (2kHz)
-        const presenceFilter = audioCtx.createBiquadFilter();
+        presenceFilter = audioCtx.createBiquadFilter();
         presenceFilter.type = 'peaking';
-        presenceFilter.frequency.value = 2000;
-        presenceFilter.Q.value = 1.0;
-        presenceFilter.gain.value = 10; // Boost vocal range by +10dB
         
-        // 3. Dynamics Compressor: Level the sound and prevent clipping
-        const compressor = audioCtx.createDynamicsCompressor();
-        compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-        compressor.knee.setValueAtTime(40, audioCtx.currentTime);
-        compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-        compressor.attack.setValueAtTime(0, audioCtx.currentTime);
-        compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+        lowPass = audioCtx.createBiquadFilter();
+        lowPass.type = 'lowpass';
+        
+        compressor = audioCtx.createDynamicsCompressor();
 
-        // Create audio graph: microphone -> filters -> compressor -> gainNode -> destination
         microphone = audioCtx.createMediaStreamSource(stream);
         gainNode = audioCtx.createGain();
-        gainNode.gain.value = parseFloat(volumeSlider.value);
         
-        // Connect nodes
+        // Connect nodes: Mic -> HighPass -> Presence -> LowPass -> Compressor -> Gain -> Destination
         microphone.connect(highPass);
         highPass.connect(presenceFilter);
-        presenceFilter.connect(compressor);
+        presenceFilter.connect(lowPass);
+        lowPass.connect(compressor);
         compressor.connect(gainNode);
         gainNode.connect(audioCtx.destination);
+        
+        // Apply Mode 
+        applyPreset(window.currentPresetMode);
         
         // Update UI
         btnStart.disabled = true;
@@ -144,6 +144,51 @@ if (volumeSlider) {
             gainNode.gain.value = parseFloat(e.target.value);
         }
     });
+}
+
+function applyPreset(mode) {
+    window.currentPresetMode = mode;
+    for(let i=1; i<=5; i++) {
+        const btn = document.getElementById('btnMode' + i);
+        if(btn) btn.classList.remove('active');
+    }
+    const activeBtn = document.getElementById('btnMode' + mode);
+    if(activeBtn) activeBtn.classList.add('active');
+
+    let hpFreq = 20, pFreq = 2000, pGain = 0, lpFreq = 20000, compThresh = -10, compRatio = 1, fixedGain = 1.0;
+
+    switch(mode) {
+        case 1: // 기본 증폭 (Standard)
+            hpFreq = 50; lpFreq = 16000; compThresh = -10; compRatio = 2; fixedGain = 2.0; break;
+        case 2: // 강력 증폭 (Compressor)
+            hpFreq = 100; lpFreq = 12000; compThresh = -30; compRatio = 12; fixedGain = 2.8; break;
+        case 3: // 대화 집중 (Vocal EQ Boost)
+            hpFreq = 200; pFreq = 2500; pGain = 12; lpFreq = 10000; compThresh = -24; compRatio = 8; fixedGain = 2.2; break;
+        case 4: // 소음 억제 (Noise Filter)
+            hpFreq = 400; pFreq = 2000; pGain = 5; lpFreq = 8000; compThresh = -20; compRatio = 6; fixedGain = 2.5; break;
+        case 5: // 귀 보호 (De-esser / Lowpass)
+            hpFreq = 100; pFreq = 2000; pGain = 2; lpFreq = 3000; compThresh = -24; compRatio = 10; fixedGain = 2.5; break;
+    }
+
+    if (volumeSlider && audioCtx) {
+        volumeSlider.value = fixedGain;
+    }
+
+    if (!audioCtx) return;
+
+    if (gainNode) gainNode.gain.setTargetAtTime(fixedGain, audioCtx.currentTime, 0.1);
+    
+    highPass.frequency.setTargetAtTime(hpFreq, audioCtx.currentTime, 0.1);
+    presenceFilter.frequency.setTargetAtTime(pFreq, audioCtx.currentTime, 0.1);
+    presenceFilter.gain.setTargetAtTime(pGain, audioCtx.currentTime, 0.1);
+    lowPass.frequency.setTargetAtTime(lpFreq, audioCtx.currentTime, 0.1);
+    compressor.threshold.setTargetAtTime(compThresh, audioCtx.currentTime, 0.1);
+    compressor.ratio.setTargetAtTime(compRatio, audioCtx.currentTime, 0.1);
+}
+
+for(let i=1; i<=5; i++) {
+    const btn = document.getElementById('btnMode' + i);
+    if(btn) btn.addEventListener('click', () => applyPreset(i));
 }
 
 // --- PWA App Install Logic ---

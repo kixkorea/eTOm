@@ -17,14 +17,38 @@
                 <a href="index.html" class="manual-link-icon" title="사용 설명서 보기">📄</a>
             </div>
             
-            <h3 style="text-align: center; color: #aaa; margin-bottom: 20px;">오디오 증폭 컨트롤</h3>
+            <h3 style="text-align: center; color: #aaa; margin-bottom: 15px;">오디오 증폭 컨트롤</h3>
             <div class="slider-container">
-                <label for="volumeSlider" style="text-align: center;">소리 크기 조절</label>
+                <label for="volumeSlider" style="text-align: center;">소리 크기 미세 조절</label>
                 <input type="range" id="volumeSlider" min="0" max="10" step="0.1" value="1">
-                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold;">
-                    <span style="font-size: 1.1rem;">작게</span>
-                    <span style="font-size: 1.1rem;">크게</span>
+                <div style="display: flex; justify-content: space-between; margin-top: 5px; font-weight: bold;">
+                    <span style="font-size: 1rem;">작게</span>
+                    <span style="font-size: 1rem;">크게</span>
                 </div>
+            </div>
+
+            <!-- Preset Buttons -->
+            <div class="preset-grid">
+                <button class="preset-btn active" id="btnMode1">
+                    <div class="preset-title">1. 기본 증폭</div>
+                    <div class="preset-desc">원래 소리 깨끗하게</div>
+                </button>
+                <button class="preset-btn" id="btnMode2">
+                    <div class="preset-title">2. 강력 증폭</div>
+                    <div class="preset-desc">작은 소리도 크게</div>
+                </button>
+                <button class="preset-btn" id="btnMode3">
+                    <div class="preset-title">3. 대화 집중</div>
+                    <div class="preset-desc">사람 목소리 또렷하게</div>
+                </button>
+                <button class="preset-btn" id="btnMode4">
+                    <div class="preset-title">4. 소음 억제</div>
+                    <div class="preset-desc">웅~ 하는 기계음 감소</div>
+                </button>
+                <button class="preset-btn" id="btnMode5">
+                    <div class="preset-title">5. 귀 보호</div>
+                    <div class="preset-desc">날카로운 고음 부드럽게</div>
+                </button>
             </div>
 
             <div id="statusIndicator" class="status-indicator stopped">
