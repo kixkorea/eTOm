@@ -67,10 +67,14 @@
 
     <!-- 사용설명서 이미지 팝업 -->
     <div id="manualPopup" class="ios-popup" style="display: none;">
-        <div class="ios-popup-content" style="padding: 15px; max-width: 90%; background-color: #1a1a1a;">
-            <span class="close-popup" id="closeManualPopup" style="top: 5px; right: 15px; z-index: 10;">&times;</span>
-            <!-- 나중에 완성된 이미지 파일명으로 아래 src 속성을 변경해 주세요 (예: manual_final.png) -->
-            <img src="manul_image.png" alt="사용설명서" id="manualImage" style="width: 100%; height: auto; border-radius: 10px; display: block; max-height: 75vh; object-fit: contain;">
+        <div class="ios-popup-content" style="padding: 15px; max-width: 90%; width: 500px; background-color: #1a1a1a; max-height: 85vh; display: flex; flex-direction: column;">
+            <div style="text-align: right; margin-bottom: 10px;">
+                <span id="closeManualPopup" style="font-size: 2.5rem; cursor: pointer; color: #888; line-height: 1;">&times;</span>
+            </div>
+            <div style="overflow-y: auto; border-radius: 10px;">
+                <!-- 세로로 긴 이미지가 화면 폭에 맞게 채워지고 위아래로 길게 스크롤 됩니다 -->
+                <img src="manul_image.png" alt="사용설명서" id="manualImage" style="width: 100%; height: auto; display: block;">
+            </div>
         </div>
     </div>
 
