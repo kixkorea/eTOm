@@ -14,7 +14,7 @@
         <div class="app-functions">
             <!-- 설명서 아이콘: 우측 상단으로 이동 -->
             <div class="top-link-container">
-                <a href="index.html" class="manual-link-icon" title="사용 설명서 보기">📄</a>
+                <a href="#" id="appManualBtn" class="manual-link-icon" title="사용 설명서 보기">📄</a>
             </div>
             
             <h3 style="text-align: center; color: #aaa; margin-bottom: 15px;">오디오 증폭 컨트롤</h3>
@@ -63,6 +63,14 @@
             <div id="errorMessage" class="error-message"></div>
         </div>
     </div>
+
+    <!-- 사용설명서 이미지 팝업 -->
+    <div id="manualPopup" class="ios-popup" style="display: none;">
+        <div class="ios-popup-content" style="padding: 15px; max-width: 90%; background-color: #1a1a1a;">
+            <span class="close-popup" id="closeManualPopup" style="top: 5px; right: 15px; z-index: 10;">&times;</span>
+            <img src="manul_image.png" alt="사용설명서" id="manualImage" style="width: 100%; height: auto; border-radius: 10px; display: block; max-height: 75vh; object-fit: contain;">
+        </div>
+    </div>
     
     <script src="app.js"></script>
     <script>
@@ -73,6 +81,24 @@
                 .catch(err => console.error('SW registration failed:', err));
             });
         }
+
+        // 사용설명서 버튼 클릭 시 팝업 열기
+        document.getElementById('appManualBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('manualPopup').style.display = 'flex';
+        });
+
+        // 사용설명서 팝업 닫기
+        document.getElementById('closeManualPopup').addEventListener('click', () => {
+            document.getElementById('manualPopup').style.display = 'none';
+        });
+
+        // 팝업 바깥 어두운 배경 클릭 시 닫기
+        document.getElementById('manualPopup').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('manualPopup')) {
+                document.getElementById('manualPopup').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
