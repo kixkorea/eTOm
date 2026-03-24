@@ -322,9 +322,9 @@ input[type=range] {
     transform: scale(0.97);
 }
 .preset-btn.active {
-    border-color: #4CAF50;
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
-    background: linear-gradient(135deg, #2e4a2e 0%, #3a5a3a 100%);
+    border-color: #D500F9; /* Bright Magenta */
+    box-shadow: 0 0 12px rgba(213, 0, 249, 0.5);
+    background: linear-gradient(135deg, #370054 0%, #571280 100%);
 }
 .preset-title {
     font-size: 1.05rem;
