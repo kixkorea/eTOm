@@ -197,7 +197,7 @@ body {
 .app-functions {
     position: relative;
     background-color: #1a1a1a;
-    padding: 30px 20px;
+    padding: 20px 15px; /* Reduced vertical footprint */
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     width: 90%;
@@ -343,11 +343,11 @@ input[type=range] {
     width: 86%;
     max-width: 450px;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 6vh 0 20px 0; /* Pushed box upwards instead of strict centering */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
 }
 
