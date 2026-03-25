@@ -1,4 +1,4 @@
-const CACHE_NAME = 'etom-cache-v8';
+const CACHE_NAME = 'etom-cache-v9';
 const urlsToCache = [
   './',
   './index.html',
