@@ -17,7 +17,7 @@
 
             <!-- 설명서 아이콘: 우측 상단으로 이동 -->
             <div class="top-link-container" style="top: 10px; right: 10px;">
-                <a href="#" id="appManualBtn" class="manual-link-icon" title="사용 설명서 보기" style="width: 30px; height: 30px; font-size: 1.2rem;">📄</a>
+                <a href="https://99pax.blogspot.com/p/etom.html" target="_blank" id="appManualBtn" class="manual-link-icon" title="사용 설명서 보기" style="width: 30px; height: 30px; font-size: 1.2rem;">📄</a>
             </div>
             
             <div style="text-align: center; color: #FFD700; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px;">⚠️ 화면이 켜져 있어야 작동합니다</div>
@@ -68,19 +68,6 @@
         </div>
     </div>
 
-    <!-- 사용설명서 이미지 팝업 -->
-    <div id="manualPopup" class="ios-popup" style="display: none;">
-        <div class="ios-popup-content" style="padding: 15px; max-width: 90%; width: 500px; background-color: #1a1a1a; max-height: 85vh; display: flex; flex-direction: column;">
-            <div style="text-align: right; margin-bottom: 10px;">
-                <span id="closeManualPopup" style="font-size: 2.5rem; cursor: pointer; color: #888; line-height: 1;">&times;</span>
-            </div>
-            <div style="overflow-y: auto; border-radius: 10px;">
-                <!-- 세로로 긴 이미지가 화면 폭에 맞게 채워지고 위아래로 길게 스크롤 됩니다 -->
-                <img src="manul_image.png" alt="사용설명서" id="manualImage" style="width: 100%; height: auto; display: block;">
-            </div>
-        </div>
-    </div>
-    
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -91,23 +78,6 @@
             });
         }
 
-        // 사용설명서 버튼 클릭 시 팝업 열기
-        document.getElementById('appManualBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('manualPopup').style.display = 'flex';
-        });
-
-        // 사용설명서 팝업 닫기
-        document.getElementById('closeManualPopup').addEventListener('click', () => {
-            document.getElementById('manualPopup').style.display = 'none';
-        });
-
-        // 팝업 바깥 어두운 배경 클릭 시 닫기
-        document.getElementById('manualPopup').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('manualPopup')) {
-                document.getElementById('manualPopup').style.display = 'none';
-            }
-        });
     </script>
 </body>
 </html>
